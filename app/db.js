@@ -4,12 +4,12 @@ var mysql = require('mysql');
 
 //local mysql db connection
 var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'root',
-    database : 'studentDB'
+    host     : 'us-cdbr-iron-east-05.cleardb.net',
+    user     : 'b3ca7cfe40e6b8',
+    password : 'a3089ee9',
+    database : 'heroku_cfe13983b5ea503'
 });
-
+//mysql://b3ca7cfe40e6b8:a3089ee9@us-cdbr-iron-east-05.cleardb.net/heroku_cfe13983b5ea503?reconnect=true
 // connection.connect(function(err) {
 //     if (err) throw err;
 connection.connect((err) =>{
