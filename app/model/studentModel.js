@@ -17,11 +17,25 @@ var Student = function(student){
 Student.createStudent = function (newStudent, result) {
         sql.query("INSERT INTO students set ?", newStudent, function (err, res) {
 
+                // if(err) {
+                //     console.log("error: ", err);
+                //     result(err, null);
+                // }
+                // else{
+                //     console.log(res.insertId);
+                //     result(null, res.insertId);
+                // }
                 if(err) {
+                    if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062)
+                    {
+                        console.log('error: ',err.sqlMessage);
+                    }
+                    else{
                     console.log("error: ", err);
                     result(err, null);
+                    }    
                 }
-                else{
+                else if(!err){
                     console.log(res.insertId);
                     result(null, res.insertId);
                 }

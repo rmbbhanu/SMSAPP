@@ -14,10 +14,16 @@ Course.createCourse = function (newCourse, result) {
         sql.query("INSERT INTO course set ?", newCourse, function (err, res) {
 
                 if(err) {
+                    if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062)
+                    {
+                        console.log('error: ',err.sqlMessage);
+                    }
+                    else{
                     console.log("error: ", err);
                     result(err, null);
+                    }    
                 }
-                else{
+                else if(!err){
                     console.log(res.insertId);
                     result(null, res.insertId);
                 }

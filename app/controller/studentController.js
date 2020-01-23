@@ -19,12 +19,12 @@ exports.create_a_student = function(req, res) {
   var new_student = new Student(req.body);
 
   //handles null error
-//    if(!new_student.student || !new_student.roll_no){
+   if(!new_student.fname ||!new_student.lname || !new_student.roll_no){
 
-//             res.status(400).send({ error:true, message: 'Please provide student rollno' });
+            res.status(400).send({ error:true, message: 'Please provide student rollno' });
 
-//         }
-// else{
+        }
+else{
 
   Student.createStudent(new_student, function(err, student) {
 
@@ -33,6 +33,7 @@ exports.create_a_student = function(req, res) {
     res.json(student);
   });
 
+  }
 };
 
 

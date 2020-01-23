@@ -19,12 +19,12 @@ exports.create_a_faculty = function(req, res) {
   var new_faculty = new Faculty(req.body);
 
   //handles null error
-//    if(!new_faculty.faculty || !new_faculty.roll_no){
+   if(!new_faculty.faculty_name || !new_faculty.f_id){
 
-//             res.status(400).send({ error:true, message: 'Please provide faculty rollno' });
+            res.status(400).send({ error:true, message: 'Please provide faculty id' });
 
-//         }
-// else{
+        }
+else{
 
   Faculty.createFaculty(new_faculty, function(err, faculty) {
 
@@ -33,6 +33,7 @@ exports.create_a_faculty = function(req, res) {
     res.json({message:"Faculty created succesfully"});
   });
 
+  }
 };
 
 

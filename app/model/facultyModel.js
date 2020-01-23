@@ -15,11 +15,25 @@ var Faculty = function(faculty){
 Faculty.createFaculty = function (newFaculty, result) {
         sql.query("INSERT INTO faculty set ?", newFaculty, function (err, res) {
 
+                // if(err) {
+                //     console.log("error: ", err);
+                //     result(err, null);
+                // }
+                // else{
+                //     console.log(res.insertId);
+                //     result(null, res.insertId);
+                // }
                 if(err) {
+                    if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062)
+                    {
+                        console.log('error: ',err.sqlMessage);
+                    }
+                    else{
                     console.log("error: ", err);
                     result(err, null);
+                    }    
                 }
-                else{
+                else if(!err){
                     console.log(res.insertId);
                     result(null, res.insertId);
                 }

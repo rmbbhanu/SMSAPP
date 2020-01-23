@@ -11,11 +11,25 @@ var Department = function(department){
 Department.createDepartment = function (newDepartment, result) {
         sql.query("INSERT INTO departments set ?", newDepartment, function (err, res) {
 
+                // if(err) {
+                //     console.log("error: ", err);
+                //     result(err, null);
+                // }
+                // else{
+                //     console.log(res.insertId);
+                //     result(null, res.insertId);
+                // }
                 if(err) {
+                    if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062)
+                    {
+                        console.log('error: ',err.sqlMessage);
+                    }
+                    else{
                     console.log("error: ", err);
                     result(err, null);
+                    }    
                 }
-                else{
+                else if(!err){
                     console.log(res.insertId);
                     result(null, res.insertId);
                 }

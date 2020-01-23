@@ -19,13 +19,12 @@ exports.create_a_department = function(req, res) {
   var new_department = new Department(req.body);
 
   //handles null error
-//    if(!new_student.student || !new_student.roll_no){
+   if(!new_department.department || !new_department.d_id){
 
-//             res.status(400).send({ error:true, message: 'Please provide student rollno' });
+            res.status(400).send({ error:true, message: 'Please provide Department name' });
 
-//         }
-// else{
-
+        }
+else{
   Department.createDepartment(new_department, function(err, department) {
 
     if (err)
@@ -34,6 +33,7 @@ exports.create_a_department = function(req, res) {
     res.json({message:'Department added succesfully'})
   });
 
+  }
 };
 
 
