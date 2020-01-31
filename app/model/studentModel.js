@@ -53,6 +53,20 @@ Student.getStudentById = function (studentId, result) {
                 }
             });
 };
+
+Student.getStudentByFname = function (studentFname, result) {
+    sql.query("Select * from students where fname = ? ", studentFname, function (err, res) {
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else{
+                result(null, res);
+
+            }
+        });
+};
+
 Student.getAllStudent = function (result) {
         sql.query("Select * from students", function (err, res) {
 

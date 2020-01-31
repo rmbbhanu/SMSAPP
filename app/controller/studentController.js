@@ -45,6 +45,13 @@ exports.read_a_student = function(req, res) {
   });
 };
 
+exports.read_a_studentFname = function(req, res) {
+  Student.getStudentByFname(req.params.studentFname, function(err, student) {
+    if (err)
+      res.send(err);
+    res.json(student);
+  });
+};
 
 exports.update_a_student = function(req, res) {
   Student.updateById(req.params.studentId, new Student(req.body), function(err, student) {

@@ -30,7 +30,7 @@ Course.createCourse = function (newCourse, result) {
             });
 };
 Course.getCourseById = function (courseId, result) {
-        sql.query("Select * from course where c_id = ? ", courseId, function (err, res) {
+        sql.query("Select * from course where course_name = ? ", courseId, function (err, res) {
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);

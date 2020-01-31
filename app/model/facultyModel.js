@@ -40,7 +40,7 @@ Faculty.createFaculty = function (newFaculty, result) {
             });
 };
 Faculty.getFacultyById = function (facultyId, result) {
-        sql.query("Select * from faculty where f_id = ? ", facultyId, function (err, res) {
+        sql.query("Select * from faculty where faculty_name = ? ", facultyId, function (err, res) {
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);
