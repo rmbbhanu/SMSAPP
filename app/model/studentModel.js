@@ -12,7 +12,6 @@ var Student = function(student){
     this.department=student.department;
     this.semester=student.semester;
     this.address=student.address;
-
 };
 Student.createStudent = function (newStudent, result) {
         sql.query("INSERT INTO students set ?", newStudent, function (err, res) {
