@@ -1,0 +1,28 @@
+*{
+        margin: 0px;
+        padding: 0px;
+    }
+    .content{
+        width: 350px;
+        box-shadow: 1px 1px 10px 2px #333;
+        border-radius: 10px;
+        overflow: hidden;
+        position: fixed;
+        margin-left: 80px;
+        margin-top: 110px;
+        background: #fff;
+    }
+    .header{
+        background: #0019ff;
+        color: #fff;
+        padding: 15px 0px;
+    }
+    .moving-body{
+        padding: 4px;
+        height: 350px;
+    }
+    .m-par{
+        text-align: center;
+        padding: 4px;
+        border-bottom: 1px solid #0019ff;
+    }
