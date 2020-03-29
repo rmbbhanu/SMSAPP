@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>ERP System Admin</title>
+    <title>ERP System Faculty Chatbot</title>
 
     <link rel="icon" href="./images/robonomics_logo.png" type="image">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,7 @@
       setTimeout("preventBack()", -100);
       window.onunload = function () { null };
   </script>
-  <!-- <script type="text/javascript">
+  <script type="text/javascript">
     var accessToken = "ba26b70da45a49a2af26c07b8e2bbdc4";
     var baseUrl = "https://api.dialogflow.com/v1/";
 
@@ -67,23 +67,23 @@
       $(".chatBox").append('<span class="responseData">' + val.result.fulfillment.speech + '</span><br><br>');
       $(".chatBox").scrollTop($(".chatBox").prop("scrollHeight"));
     }
-  </script> -->
+  </script>
     <link rel="stylesheet" href="./mycss/mystyle.css">
   </head>
   
   <body>
-
+    <!-- style="background-color: #0019ff;" -->
     <img class="wave" src="images/wave.png">
       <a href="/" class="btn btn-info btn-lg" style="margin-left: 50px; margin-top: 35px; background-color: #0019ff;">
-        <span class="glyphicon glyphicon-log-out"></span> Log out
+        <span class="glyphicon glyphicon-log-out" ></span> Log out
       </a>
       <div class="ptext">
-        <center>RPA(UiPath) and Chatbot being used in ERP system<br>for Student Management System.<br>For Admin</center>
+        <center>RPA(UiPath) and Chatbot being used in ERP system<br>for Student Management System.<br>For Faculty</center>
       </div>
 
   
       
-      <!-- <img src="./images/robonomics_logo.png" alt="RobonomicsAI" class="open-button" onclick="openForm()">
+      <img src="./images/robonomics_logo.png" alt="RobonomicsAI" class="open-button" onclick="openForm()">
 
   <div class="chat-popup" id="myForm">
     <form class="form-container">
@@ -101,7 +101,7 @@
       </header>
 
       <section id="message">
-        <div class='chatBox'>
+        <div class='chatBox' style="height: 340px;">
 
         </div>
       </section>
@@ -115,9 +115,9 @@
 
     </form>
   </div>
-  </div> -->
+  </div>
 
-  <!-- <script>
+  <script>
     function openForm() {
       document.getElementById("myForm").style.display = "block";
     }
@@ -125,6 +125,6 @@
     function closeForm() {
       document.getElementById("myForm").style.display = "none";
     }
-  </script> -->
+  </script>
   </body>
 </html>

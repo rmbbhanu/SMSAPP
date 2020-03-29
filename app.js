@@ -36,7 +36,7 @@ app.get('/', function (request, response) {
 
     var options = {
         'method': 'GET',
-        'url': 'https://infinite-garden-28674.herokuapp.com/notifications',
+        'url': 'https://morning-shore-76196.herokuapp.com/notifications',
         'headers': {}
     };
     request(options, function (error, response) {
@@ -62,6 +62,10 @@ app.get("/admin", function (req, res) {
     res.redirect("/");
 });
 
+app.get("/faculty_chatbot.html",function(req,res){
+    // res.render("faculty_chatbot");
+    res.sendFile(__dirname + "/faculty_chatbot.html")
+});
 
 
 app.post('/index.html', function (request, response) {
@@ -169,10 +173,11 @@ app.post("/faculty_redirect", function (req, res) {
     console.log(announce_description);
 
     var request = require('request');
+    //https://morning-shore-76196.herokuapp.com/notifications
     //api call to post notification into db
     var options = {
         'method': 'POST',
-        'url': 'https://infinite-garden-28674.herokuapp.com/notifications',
+        'url': 'https://morning-shore-76196.herokuapp.com/notifications',
         'headers': {},
         form: {
             'name': sender_name,
