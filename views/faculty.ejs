@@ -95,7 +95,7 @@
       </div>
       <div class="modal-body">
 
-        <form id="" action="/faculty_redirect" method="post" enctype="multipart/form-data">
+        <form id="uploadForm" action="/faculty_redirect" method="post" enctype="multipart/form-data">
 
           <div class="form-group">
             <label for="Sender Name">Sender's Name:</label>
@@ -151,6 +151,11 @@
     span.onclick = function () {
       modal.style.display = "none";
     }
+    // // close for announcement
+    // span.onclick = function () {
+    //   modal1.style.display = "none";
+    // }
+    
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {

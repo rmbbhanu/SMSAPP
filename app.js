@@ -121,6 +121,7 @@ app.post('/index.html', function (request, response) {
             console.error(error)
         })
 });
+///faculty_assignment
 app.post('/faculty_assignment', function (req, res) {
     var file = req.files.uploaded_image;
     var img_name = file.name;
