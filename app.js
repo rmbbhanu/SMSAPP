@@ -1,4 +1,6 @@
 const axios = require("axios");
+const fetch = require("node-fetch");
+
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
@@ -6,6 +8,7 @@ var fileUpload = require('express-fileupload');
 var nodemailer = require('nodemailer');
 var path = require("path");
 const request = require("request");
+// const { json } = require("body-parser");
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -15,7 +18,46 @@ app.use(fileUpload());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+async function apiCallFunction(method,baseURL,category){
+    try{
+        let response = await fetch(baseURL+category,{
+            method: method,
+            mode: 'no-cors',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+            },
+            // body: body
+        });
+        let result = await response.json();
+        // console.log(result)
+        return result
+    }catch(e){
+        console.log(e)
+        alert(e);
 
+    }
+}
+async function apiCallForPost(baseURL,category,body){
+    try{
+        let response = await fetch(baseURL+category,{
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+            },
+            body: body
+        });
+        let result = await response.json();
+        // console.log(result)
+        return result
+    }catch(e){
+        console.log(e)
+        alert(e);
+    }
+}
+const baseURLAPI= 'https://stark-fortress-47961.herokuapp.com/';
 
 var transport = nodemailer.createTransport({
     service: 'gmail',
@@ -31,11 +73,11 @@ var transport = nodemailer.createTransport({
     // }
 });
 var order;
-var students;
-var courses;
-var faculties;
-var departments;
-var attendance;
+// var students;
+// var courses;
+// var faculties;
+// var departments;
+// var attendance;
 
 
 
@@ -83,103 +125,68 @@ app.get("/admin_pages", function (req, res) {
 });
 
 app.get("/admin_faculty", function (req, res) {
-    var options = {
-        'method': 'GET',
-        'url': 'https://stark-fortress-47961.herokuapp.com/faculties',
-        'headers': {}
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        var res1 = JSON.parse(response.body);
-        faculties = res1;
-        console.log("faculties rendered");
-        res.render("./admin_panel/admin_faculty", {
-            faculties: faculties
-        })
-    });
+    
+    apiCallFunction('GET',baseURLAPI,'faculties/')
+    .then((data)=>
+     res.render("./admin_panel/admin_faculty", {
+        //  count_faculty: data.length,
+        faculties: data})
+        
+    )
+    .catch((error) => {
+        console.error(error)
+    })
 });
 
 app.get("/admin_student", function (req, res) {
-    var options = {
-        'method': 'GET',
-        'url': 'https://stark-fortress-47961.herokuapp.com/students',
-        'headers': {}
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        var res1 = JSON.parse(response.body);
-        students = res1;
-        console.log("students rendered");
-        res.render("./admin_panel/admin_student", {
-            students: students
-        })
-    }); 
+    
+    apiCallFunction('GET',baseURLAPI,'students/')
+    .then((data)=> res.render("./admin_panel/admin_student", {
+                students: data})
+    )
+    .catch((error) => {
+        console.error(error)
+    });
 });
 app.get("/admin_course", function (req, res) {
-    var options = {
-        'method': 'GET',
-        'url': 'https://stark-fortress-47961.herokuapp.com/courses',
-        'headers': {}
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        var res1 = JSON.parse(response.body);
-        courses = res1;
-         console.log("courses rendered");
-        res.render("./admin_panel/admin_course", {
-            courses: courses
-        })
+    apiCallFunction('GET',baseURLAPI,'courses/')
+    .then((data)=> res.render("./admin_panel/admin_course", {
+        courses: data})
+    )
+    .catch((error) => {
+        console.error(error)
     });
 });
 
 app.get("/admin_department", function (req, res) {
-    var options = {
-        'method': 'GET',
-        'url': 'https://stark-fortress-47961.herokuapp.com/departments',
-        'headers': {}
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        var res1 = JSON.parse(response.body);
-        departments = res1;
-        console.log("departments rendered");
-        res.render("./admin_panel/admin_department", {
-            departments: departments
-        })
+    apiCallFunction('GET',baseURLAPI,'departments/')
+    .then((data)=> res.render("./admin_panel/admin_department", {
+        departments: data})
+    )
+    .catch((error) => {
+        console.error(error)
     });
 });
 
 app.get("/admin_attendance", function (req, res) {
-    var options = {
-        'method': 'GET',
-        'url': 'https://stark-fortress-47961.herokuapp.com/attendance',
-        'headers': {}
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        var res1 = JSON.parse(response.body);
-        attendance = res1;
-        console.log("attendance rendered");
-        res.render("./admin_panel/admin_attendance", {
-            attendance: attendance
-        })
+    apiCallFunction('GET',baseURLAPI,'attendance/')
+    .then((data)=> res.render("./admin_panel/admin_attendance", {
+        attendance: data})
+    )
+    .catch((error) => {
+        console.error(error)
     });
 });
 
 app.get("/admin_faculty_announcement", function (req, res) {
-    var options = {
-        'method': 'GET',
-        'url': 'https://stark-fortress-47961.herokuapp.com/notifications',
-        'headers': {}
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        var res1 = JSON.parse(response.body);
-        notifications = res1;
-        console.log("notifications rendered");
-        res.render("./admin_panel/admin_faculty_announcement", {
-            notifications: notifications
-        })
+    
+    apiCallFunction('GET',baseURLAPI,'notifications/')
+    .then((data)=> res.render("./admin_panel/admin_faculty_announcement", {
+        notifications: data}),
+        console.log("announcement renederd")
+    )
+    .catch((error) => {
+        console.error(error)
     });
 });
 
@@ -283,22 +290,14 @@ app.post("/faculty_redirect", function (req, res) {
     console.log(sender_name);
     console.log(dept_announce);
     console.log(announce_description);
-    //https://stark-fortress-47961.herokuapp.com/notifications
-    //api call to post notification into db
-    var options = {
-        'method': 'POST',
-        'url': 'https://stark-fortress-47961.herokuapp.com/notifications',
-        'headers': {},
-        form: {
-            'name': sender_name,
-            'class': dept_announce,
-            'description': announce_description
-        }
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body);
-    });
+    apiCallForPost(baseURLAPI,'notifications/',{
+        'name': sender_name,
+        'class': dept_announce,
+        'description': announce_description
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+      });
     res.render("faculty");
 });
 
@@ -312,21 +311,16 @@ app.post("/add_faculty_redirect", function (req, res) {
     console.log(faculty_name);
     console.log(email_id);
     console.log(department);
-    var options = {
-        'method': 'POST',
-        'url': 'https://stark-fortress-47961.herokuapp.com/faculties',
-        'headers': {},
-        form: {
+    
+    apiCallFunction(baseURLAPI,'faculties/',{
             'f_id': faculty_id,
             'faculty_name': faculty_name,
             'email_id': email_id,
             'department': department
-        }
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body);
-    });
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+      });
     
     res.redirect("./admin_faculty");
     // res.render("./admin_panel/admin_faculty");
@@ -353,26 +347,19 @@ app.post("/add_student_redirect", function (req, res) {
     console.log(semester);
     console.log(address);
     console.log(email_id);
-    var options = {
-        'method': 'POST',
-        'url': 'https://stark-fortress-47961.herokuapp.com/students',
-        'headers': {},
-        form: {
-            // 'student_id': student_id,
-            'fname': first_name,
-            'lname': last_name,
-            'roll_no': roll_no,
-            'class_id': class_id,
-            'department': department,
-            'semester': semester,
-            'address': address,
-            'email_id': email_id
-        }
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body);
-    });
+    apiCallFunction(baseURLAPI,'students/',{
+        'fname': first_name,
+        'lname': last_name,
+        'roll_no': roll_no,
+        'class_id': class_id,
+        'department': department,
+        'semester': semester,
+        'address': address,
+        'email_id': email_id
+})
+.catch((error) => {
+    console.error('Error:', error);
+  });
     res.redirect("./admin_student");
 });
 
@@ -386,21 +373,16 @@ app.post("/add_course_redirect", function (req, res) {
     console.log(course_name);
     console.log(faculty_name);
     console.log(department);
-    var options = {
-        'method': 'POST',
-        'url': 'https://stark-fortress-47961.herokuapp.com/courses',
-        'headers': {},
-        form: {
-            'c_id': course_id,
-            'course_name': course_name,
-            'faculty_name': faculty_name,
-            'department': department
-        }
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body);
-    });
+    
+    apiCallFunction(baseURLAPI,'courses/',{
+        'c_id': course_id,
+        'course_name': course_name,
+        'faculty_name': faculty_name,
+        'department': department
+})
+.catch((error) => {
+    console.error('Error:', error);
+  });
     res.redirect("./admin_course");
 });
 
@@ -413,20 +395,16 @@ app.post("/add_department_redirect", function (req, res) {
     console.log(department_id);
     console.log(department_name);
     console.log(hod);
-    var options = {
-        'method': 'POST',
-        'url': 'https://stark-fortress-47961.herokuapp.com/departments',
-        'headers': {},
-        form: {
-            'd_id': department_id,
+    
+    apiCallFunction('https://stark-fortress-47961.herokuapp.com/','departments/',{
+        'd_id': department_id,
             'department': department_name,
             'hod': hod
-        }
-    };
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body);
-    });
+})
+.catch((error) => {
+    console.error('Error:', error);
+    alert(error);
+  });
     res.redirect("./admin_department");
 });
 // app.post(function (req, res) {
