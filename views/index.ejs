@@ -7,13 +7,15 @@
   	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	  <script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	  
-	  <script type="text/javascript">
+	  <!-- <script type="text/javascript">
         function preventBack() { window.history.forward(); }
         setTimeout("preventBack()", -100);
         window.onunload = function () { null };
-    </script>
+    </script> -->
   </head>
   <body>
+	<!-- <marquee>Have removed Login module temporarily for Demo Purpose</marquee> -->
+
   	<img class="wave" src="images/wave.png">
   	<div class="container">
   		<div class="img">
@@ -22,15 +24,15 @@
   		<div class="login-content">
   			<form action="/index.html" method="POST">
   				<img src="images/avatar.svg">
-  				<h3 class="title">Welcome to ERP System</h3>
-                <div class="dropDown">
+  				<h3 class="title">Welcome to Student Management System</h3>
+                <!-- <div class="dropDown">
                   <select name="userType">
                     <option value="admin">Admin</option>
                     <option value="faculty">Faculty</option>
                     <option value="student">Student</option>
                   </select>               
-                </div>
-             		<div class="input-div one">
+                </div> -->
+             		<!-- <div class="input-div one">
              		   <div class="i">
              		   		<i class="fas fa-user"></i>
              		   </div>
@@ -38,21 +40,42 @@
              		   		<h5>Username</h5>
              		   		<input type="text" name="username" class="input">
              		   </div>
-             		</div>
-             		<div class="input-div pass">
+             		</div> -->
+             		<!-- <div class="input-div pass">
              		   <div class="i"> 
              		    	<i class="fas fa-lock"></i>
              		   </div>
              		   <div class="div">
-             		    	<h5>Password</h5>
-             		    	<input type="password" name="password" class="input">
-              	   </div>
-              	</div>
-              	<input type="submit" class="btn" value="Login">
+              	   		</div> 
+					</div> -->
+				<div>
+					<div>
+						<marquee style="color: red; padding: 1%;">Have removed Login module temporarily for Demo Purpose</marquee>
+					 </div>
+					<div>
+						<input type="submit" name="Admin" class="btn" value="admin"></input>
+					</div>
+					<div>
+						<input type="submit" name="Faculty" class="btn" value="faculty"></input>
+					</div>
+					 <div>
+						<input type="submit" name="Student" class="btn" value="student"></input>
+					 </div>
+				</div>
+				
+              	<!-- <input type="submit" class="btn" value="Login"> -->
               </form>
           </div>
-      </div>
+	</div>
+	  
       <script type="text/javascript" src="Javascript/main.js"></script>
+	  <script src="Ajax.js"></script>
+    <script src=
+"https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity=
+"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous">
+    </script>
   </body>
 
 </html>
